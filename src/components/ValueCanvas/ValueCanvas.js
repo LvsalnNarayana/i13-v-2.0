@@ -15,11 +15,6 @@ const ValueCanvas = () => {
         <>
             <div className='relative w-full flex justify-center'>
                 <img src="/valueMap.svg" className='w-[55%]' alt="" />
-                {/* <div className="wrapper">
-                    <div className="sector bg-[#38a169]" style={{ transform: 'rotate(360deg) skew(160deg)' }}></div>
-                    <div className="sector bg-[#38a169]" style={{ transform: 'rotate(240deg) skew(150deg)' }}></div>
-                    <div className="sector bg-[#38a169]" style={{ transform: 'rotate(110deg) skew(140deg)' }}></div>
-                </div> */}
                 <Note
                     classes='note_css top-8 right-52'
                     contents={gainCreators?.contents} name={'Gain Creators'} />

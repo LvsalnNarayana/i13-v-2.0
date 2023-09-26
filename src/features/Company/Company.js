@@ -19,6 +19,7 @@ const companyForm = createSlice({
     initialState,
     reducers: {
         updateCompanyName: (state, action) => {
+            console.log("hello");
             state.company_name = action.payload;
         },
         updateIndustry: (state, action) => {
@@ -65,5 +66,5 @@ export const {
     updateBusinessModel,
 } = companyForm.actions;
 
-export const selectCompanyform = (state) => state.company;
+export const selectCompanyform = (state) => state.companyform;
 export default companyForm.reducer;

@@ -49,8 +49,8 @@ const ApplicationMenu = () => {
                     <div className='w-[10%]'><SecureIcon classes='w-6 h-6' /></div>
                     {leftDrawerStatus && <p className='font-semibold text-md ml-4 transition-all ease-in transition-75'>Market Context Canvas</p>}
                 </div >
-                <div className={`application_menu_item py-3 opacity-50 ${leftDrawerStatus ? 'justify-start  pl-6' : 'justify-center'} cursor-not-allowed`}>
-                    <div className='w-[10%]'><SecureIcon classes='w-6 h-6' /></div>
+                <div className={`application_menu_item bg-[#38a169] opacity-100  py-3 text-white ${leftDrawerStatus ? 'justify-start  pl-6' : 'justify-center'} cursor-pointer`}>
+                    <div className='w-[10%]'><SecureIcon classes='w-6 h-6 !fill-white' /></div>
                     {leftDrawerStatus && <p className='font-semibold text-md ml-4 transition-all ease-in transition-75'>Value Proposition Canvas</p>}
                 </div >
                 <div className={`application_menu_item py-3 opacity-50 ${leftDrawerStatus ? 'justify-start  pl-6' : 'justify-center'} cursor-not-allowed`}>

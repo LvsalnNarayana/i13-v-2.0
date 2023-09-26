@@ -1,8 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-// Read your API key from an environment variable or a config file
-const apiKey = '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';
-// const apiKey = process.env.REACT_APP_OPENAI_API_KEY; // Replace with your actual method of accessing the API key
+const apiKey = 'ENTER YOUR API KEY HERE';
 const maxRequests = 100;
 
 const getRequestCount = () => {
@@ -14,15 +12,13 @@ const setRequestCount = (count) => {
     localStorage.setItem('apiRequestCount', count.toString());
 };
 
-// Configure the baseQuery with the API key and POST method
 const baseQuery = fetchBaseQuery({
     baseUrl: 'https://api.openai.com/v1',
-    method: 'POST', // Use the POST method
-    body: {}, // Include an empty object for now; you will add data to it in the request
+    method: 'POST', 
+    body: {}, 
     prepareHeaders: (headers) => {
-        // Add the API key to the request headers
         headers.set('Authorization', `Bearer ${apiKey}`);
-        headers.set('Content-Type', 'application/json'); // Set content type to JSON
+        headers.set('Content-Type', 'application/json'); 
         return headers;
     },
 });

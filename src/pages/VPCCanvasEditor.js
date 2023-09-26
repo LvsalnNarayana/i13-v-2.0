@@ -43,7 +43,7 @@ const VPCCanvasEditor = () => {
                         <div
                             onClick={() => handleActiveCanvas(0)}
                             className={`canvasStatusController mr-2`}
-                            style={canvasStatus === 0 ? { boxShadow: '0px 0px 12px rgba(6, 188, 6, 0.6)' } : {}}
+                            style={canvasStatus === 0 ? { boxShadow: '1px 1px 5px rgba(6, 188, 6, 0.6)' } : {}}
                         >
                             <p className='text-md font-semibold mb-2'>Value Map</p>
                             <LinearProgress

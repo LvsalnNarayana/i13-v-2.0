@@ -53,7 +53,7 @@ const ChatBot = () => {
                             </div>
                         </div>
                         <Divider className='!my-6' />
-                        <div className='flex justify-start items-center flex-col max-h-[300px] overflow-auto scrollbar scrollbar-w-2 scrollbar-rounded-xl scrollbar-thumb-[#38a169] pr-4'>
+                        <div className='flex justify-start items-center flex-col max-h-[300px] overflow-auto scrollbar-thin scrollbar-w-2 scrollbar-rounded-xl scrollbar-thumb-[#38a169] pr-4'>
                             <div className='flex justify-start items-start w-[90%] mb-10'>
                                 <Avatar className='mt-3' sx={{ width: 40, height: 40 }} />
                                 <div className='bg-white w-fit ml-5 min-h-12 p-2 px-4' style={{
@@ -61,7 +61,7 @@ const ChatBot = () => {
                                     background: '#fff',
                                     boxShadow: '5px 5px 13px #c5cfcb,-5px -5px 13px #ffffff'
                                 }}>
-                                    <p className='text-md w-fit'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                                    <p className='text-md w-fit'>what is value proportion canvas? </p>
                                 </div>
                             </div>
                             <div className='flex justify-start items-start w-[90%] mb-10'>
@@ -71,27 +71,7 @@ const ChatBot = () => {
                                     background: '#fff',
                                     boxShadow: '5px 5px 13px #c5cfcb,-5px -5px 13px #ffffff'
                                 }}>
-                                    <p className='text-md'> the printing and typesetting industry. </p>
-                                </div>
-                            </div>
-                            <div className='flex flex-row-reverse justify-end items-start w-[90%] mb-10'>
-                                <Avatar className='mt-3' sx={{ width: 40, height: 40 }} />
-                                <div className='w-fit mr-5 min-h-12 p-2 px-4' style={{
-                                    borderRadius: '10px',
-                                    background: '#fff',
-                                    boxShadow: '5px 5px 13px #c5cfcb,-5px -5px 13px #ffffff'
-                                }}>
-                                    <p className='text-md'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                </div>
-                            </div>
-                            <div className='flex justify-end items-start flex-row-reverse w-[90%] mb-10'>
-                                <Avatar className='mt-3' sx={{ width: 40, height: 40 }} />
-                                <div className='w-fit mr-5 min-h-12 p-2 px-4' style={{
-                                    borderRadius: '10px',
-                                    background: '#fff',
-                                    boxShadow: '5px 5px 13px #c5cfcb,-5px -5px 13px #ffffff'
-                                }}>
-                                    <p className='text-md break-all'>Lorem Ipsum is simply dummy text of the printing adiahdisdiasgdiouasdiausdigasdiuasydioyasiodyasiudyiasydiyasidsaidiasydiasdyaidyiasydiasydiasydiasydiasydiasydiasydiasydioasyidyasidyasidyaisydiasydisaydiasydiays </p>
+                                    <p className='text-md'> A Value Proposition Canvas (originally from Strategyzer)  is a tool to achieve Product-Market fit. It helps you get to the bottom of a customer’s pain point and build solutions that provides real value. </p>
                                 </div>
                             </div>
                             <div className='flex justify-end items-start w-full mb-10'>

@@ -13,18 +13,8 @@ const CustomerCanvas = () => {
   const cxjobs = useSelector(selectCxJob)
   return (
     <>
-      {/* 
-        bg-[#DC4A4A]
-        bg-[#0EA98D]
-        bg-[#099DB0] 
-      */}
       <div className='relative w-full flex justify-center'>
         <img src="/customerProfile.svg" className='w-[55%]' alt="" />
-        {/* <div className="wrapper rounded-full">
-          <div className="sector bg-[#38a169]" style={{ transform: 'rotate(360deg) skew(160deg)' }}></div>
-          <div className="sector bg-[#38a169]" style={{ transform: 'rotate(240deg) skew(150deg)' }}></div>
-          <div className="sector bg-[#38a169]" style={{ transform: 'rotate(110deg) skew(140deg)' }}></div>
-        </div> */}
         <Note
           classes='note_css top-8 left-74'
           contents={gains?.contents} name={'Gains'} />

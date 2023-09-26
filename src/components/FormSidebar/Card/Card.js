@@ -54,7 +54,6 @@ const Card = (props) => {
   return (
     <div className='p-3 rounded-md mt-7 m-2 flex justify-between items-center' style={{
       borderRadius: '10px',
-      // background: '#f0fdf7',
       background: '#fff',
       boxShadow: '3px 3px 5px #c5cfcb,-3px -3px 5px #ffffff'
     }}>

@@ -5,15 +5,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppBar } from '../StyledComponents/StyledComponents';
 import {
-    openRightDrawer,
+    // openRightDrawer,
     openLeftDrawer
 } from '../../features/AppState/AppState';
 import {
     selectLeftDrawer,
     selectRightDrawer
 } from '../../features/AppState/AppState';
-import DownloadIcon from '@mui/icons-material/Download';
-import { Link } from 'react-router-dom';
+// import DownloadIcon from '@mui/icons-material/Download';
+// import { Link } from 'react-router-dom';
 
 
 const Header = () => {
@@ -24,9 +24,9 @@ const Header = () => {
     const handleLeftDrawerOpen = () => {
         dispatch(openLeftDrawer())
     }
-    const handleRightDrawerOpen = () => {
-        dispatch(openRightDrawer())
-    }
+    // const handleRightDrawerOpen = () => {
+    //     dispatch(openRightDrawer())
+    // }
     return (
         <>
             <AppBar
@@ -48,14 +48,14 @@ const Header = () => {
                         <MenuIcon />
                     </IconButton>
                     <img src="/i13logo.png" alt="logo" className='w-52' />
-                    <Link to={'/report'} style={{ marginLeft: 'auto' }} target="_blank">
+                    {/* <Link to={'/report'} style={{ marginLeft: 'auto' }} target="_blank">
                         <IconButton
                             color="inherit"
                             aria-label="Report"
                         >
                             <DownloadIcon />
                         </IconButton>
-                    </Link>
+                    </Link> */}
                 </Toolbar>
             </AppBar>
         </>

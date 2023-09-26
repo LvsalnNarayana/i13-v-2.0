@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import {
     TextField,
     Autocomplete,
     FormControl,
     MenuItem,
     Select,
-    Button,
 } from '@mui/material';
 import {
     selectCompanyform,
@@ -27,6 +27,7 @@ import { countries, industries } from '../../constants';
 
 const Home = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const company = useSelector(selectCompanyform);
     const [formState, setFormState] = useState(false);
     const [formErrors, setFormErrors] = useState({});
@@ -35,52 +36,53 @@ const Home = () => {
         setFormState(true);
     };
 
-    const handleSave = () => {
+    const handleSave = (event) => {
+        event.preventDefault()
         const errors = {};
-
-        if (!company.companyName) {
-            errors.companyName = 'Company name is required.';
+        if (!company?.company_name) {
+            errors.company_name = 'Company name is required.';
         }
-        if (!company.industry) {
+        if (!company?.industry) {
             errors.industry = 'Industry is required.';
         }
-        if (!company.vertical) {
+        if (!company?.vertical) {
             errors.vertical = 'Vertical is required.';
         }
-        if (!company.companyType) {
-            errors.companyType = 'Company type is required.';
+        if (!company?.company_type) {
+            errors.company_type = 'Company type is required.';
         }
-        if (!company.companySize) {
+        if (!company?.companySize) {
             errors.companySize = 'Company size is required.';
         }
-        if (!company.headquartersLocation) {
+        if (!company?.headquartersLocation) {
             errors.headquartersLocation = 'Headquarters location is required.';
         }
-        if (!company.targetRegions) {
+        if (!company?.targetRegions) {
             errors.targetRegions = 'Target regions are required.';
         }
-        if (!company.fundingStage) {
+        if (!company?.fundingStage) {
             errors.fundingStage = 'Funding stage is required.';
         }
-        if (!company.annualRevenue) {
+        if (!company?.annualRevenue) {
             errors.annualRevenue = 'Annual revenue is required.';
         }
-        if (!company.businessModel) {
+        if (!company?.businessModel) {
             errors.businessModel = 'Business model is required.';
         }
 
         if (Object.keys(errors).length === 0) {
             // Dispatch the appropriate actions to update the Redux state
-            dispatch(updateCompanyName(company.companyName));
+            dispatch(updateCompanyName(company.company_name));
             dispatch(updateIndustry(company.industry));
             dispatch(updateVertical(company.vertical));
-            dispatch(updateCompanyType(company.companyType));
+            dispatch(updateCompanyType(company.company_type));
             dispatch(updateCompanySize(company.companySize));
             dispatch(updateHeadquartersLocation(company.headquartersLocation));
             dispatch(updateTargetRegions(company.targetRegions));
             dispatch(updateFundingStage(company.fundingStage));
             dispatch(updateAnnualRevenue(company.annualRevenue));
             dispatch(updateBusinessModel(company.businessModel));
+            navigate('/VPC');
         } else {
             setFormErrors(errors);
         }
@@ -110,18 +112,20 @@ const Home = () => {
     const formVariants = {
         hidden: {
             opacity: 0,
-            y: -700,
+            y: 0,
+            display: 'none'
         },
         visible: {
             opacity: 1,
-            y: 0,
+            y: '-90%',
+            display: 'block',
             transition: {
                 duration: 0.3,
             },
         },
         exit: {
             opacity: 0,
-            y: 700,
+            y: '100%',
             transition: {
                 duration: 0.3,
             },
@@ -129,8 +133,9 @@ const Home = () => {
     };
 
     return (
-        <div className='flex flex-col justify-center items-center min-h-screen text-center overflow-hidden'>
+        <div className='flex flex-col justify-center items-center min-h-screen text-center'>
             <motion.div
+                className='h-screen min-h-screen flex justify-center items-center flex-col'
                 initial="hidden"
                 animate={formState ? "exit" : "visible"}
                 variants={textVariants}
@@ -145,30 +150,32 @@ const Home = () => {
                 </button>
             </motion.div>
             <motion.div
-                className='w-1/3'
+                className='w-1/3 h-screen min-h-screen flex justify-center items-center'
                 initial="hidden"
                 animate={!formState ? "exit" : "visible"}
                 variants={formVariants}>
                 <form className='w-full'>
                     <label htmlFor='company_name' className='text-lg my-4 block font-semibold text-left'>What is the name of your company?</label>
                     <TextField
+                        placeholder='Enter Company Name'
                         id="company_name"
                         name='company_name'
-                        value={company.company_name || ""}
+                        value={company?.company_name}
                         size="small"
                         className='w-full'
-                        onChange={(event) => { dispatch(updateCompanyName({ ...company, company_name: event.target.value })) }}
+                        onChange={(event) => { dispatch(updateCompanyName(event.target.value)) }}
                     />
                     {formErrors.company_name && (
-                        <p className="text-red-500">{formErrors.company_name}</p>
+                        <p className="text-red-500 text-left">{formErrors.company_name}</p>
                     )}
                     <label htmlFor='industry_type' className='text-lg my-4 block font-semibold text-left'>What industry is your company in?</label>
                     <Autocomplete
-                        value={company.industry || ""}
+                        placeholder='hello'
+                        value={company?.industry}
                         onChange={(event, newValue) => {
-                            dispatch(updateCompanyName({ ...company, industry: newValue?.label || "" }))
+                            dispatch(updateIndustry(newValue?.label))
                         }}
-                        inputValue={company.industry || ""}
+                        inputValue={company?.industry}
                         id="industry_type"
                         options={industries}
                         freeSolo
@@ -180,35 +187,40 @@ const Home = () => {
                                 InputProps={{
                                     ...params.InputProps,
                                     type: 'search',
+                                    placeholder: 'Enter Industry Type'
                                 }}
                             />
                         )}
                     />
                     {formErrors.industry && (
-                        <p className="text-red-500">{formErrors.industry}</p>
+                        <p className="text-red-500 text-left">{formErrors.industry}</p>
                     )}
                     <label htmlFor='vertical' className='text-lg my-4 block font-semibold text-left'>Within your industry, what particular vertical are you tackling?</label>
                     <TextField
                         id="vertical"
                         name='vertical'
-                        value={company.vertical || ""}
+                        value={company?.vertical}
                         size="small"
                         className='w-full'
-                        onChange={(event) => { dispatch(updateVertical({ ...company, vertical: event.target.value })) }}
+                        placeholder='Enter Vertical'
+                        onChange={(event) => { dispatch(updateVertical(event.target.value)) }}
                     />
                     {formErrors.vertical && (
-                        <p className="text-red-500">{formErrors.vertical}</p>
+                        <p className="text-red-500 text-left">{formErrors.vertical}</p>
                     )}
                     <label htmlFor='company_type' className='text-lg my-4 block font-semibold text-left'>What type of company are you?</label>
                     <FormControl fullWidth size='small'>
                         <Select
                             id="company_type"
-                            onChange={(event) => { dispatch(updateCompanyType({ ...company, company_type: event.target.value })) }}
+                            onChange={(event) => { dispatch(updateCompanyType(event.target.value)) }}
                             variant='outlined'
                             name='company_type'
                             className='text-left'
-                            value={company.company_type || ''} // Set a default value ('') if company_type is undefined
+                            value={company?.company_type} // Set a default value ('') if company_type is undefined
                         >
+                            <MenuItem selected disabled value=''>
+                                <em>Choose Company Type</em>
+                            </MenuItem>
                             <MenuItem value={'B2B'}>B2B</MenuItem>
                             <MenuItem value={'B2C'}>B2C</MenuItem>
                             <MenuItem value={'B2B2C'}>B2B2C</MenuItem>
@@ -218,18 +230,21 @@ const Home = () => {
                         </Select>
                     </FormControl>
                     {formErrors.company_type && (
-                        <p className="text-red-500">{formErrors.company_type}</p>
+                        <p className="text-red-500 text-left">{formErrors.company_type}</p>
                     )}
                     <label htmlFor='company_size' className='text-lg my-4 block font-semibold text-left'>What is the size of your company?</label>
                     <FormControl fullWidth size='small'>
                         <Select
                             id="company_size"
-                            value={company.companySize || ''}
-                            onChange={(event) => { dispatch(updateCompanySize({ ...company, companySize: event.target.value })) }}
+                            value={company?.companySize}
+                            onChange={(event) => { dispatch(updateCompanySize(event.target.value)) }}
                             variant='outlined'
                             name='company_size'
                             className='text-left'
                         >
+                            <MenuItem selected disabled value=''>
+                                <em>Choose Company Type</em>
+                            </MenuItem>
                             <MenuItem value={10}>1-10</MenuItem>
                             <MenuItem value={20}>11-50</MenuItem>
                             <MenuItem value={30}>51-200</MenuItem>
@@ -239,15 +254,17 @@ const Home = () => {
                         </Select>
                     </FormControl>
                     {formErrors.companySize && (
-                        <p className="text-red-500">{formErrors.companySize}</p>
+                        <p className="text-red-500 text-left">{formErrors.companySize}</p>
                     )}
                     <label htmlFor='company_headquarters' className='text-lg my-4 block font-semibold text-left'>Where is the primary headquarters of your company?</label>
                     <Autocomplete
-                        value={company.headquartersLocation || ""}
+                        value={company?.headquartersLocation || ""}
                         disableClearable
-                        onChange={(event) => {
+                        onChange={(event, newValue) => {
                             event.preventDefault();
-                            dispatch(updateHeadquartersLocation({ ...company, headquartersLocation: event.target.value?.label }))
+                            // Check if newValue is defined before accessing its label property
+                            const selectedLabel = newValue ? newValue.label : "";
+                            dispatch(updateHeadquartersLocation(selectedLabel));
                         }}
                         id="company_headquarters"
                         options={countries}
@@ -263,15 +280,16 @@ const Home = () => {
                             />
                         )}
                     />
+
                     {formErrors.headquartersLocation && (
-                        <p className="text-red-500">{formErrors.headquartersLocation}</p>
+                        <p className="text-red-500 text-left">{formErrors.headquartersLocation}</p>
                     )}
                     <label htmlFor='company_target_regions' className='text-lg my-4 block font-semibold text-left'>Where are the primary target regions of your company?</label>
                     <Autocomplete
-                        value={company.targetRegions || ""}
-                        onChange={(event) => {
-                            event.preventDefault();
-                            dispatch(updateTargetRegions({ ...company, targetRegions: event.target.value }))
+                        value={company?.targetRegions || ""}
+                        onChange={(event, newValue) => {
+                            // No need to prevent default here
+                            dispatch(updateTargetRegions(newValue));
                         }}
                         id="company_target_regions"
                         options={countries}
@@ -288,20 +306,23 @@ const Home = () => {
                             />
                         )}
                     />
+
                     {formErrors.targetRegions && (
-                        <p className="text-red-500">{formErrors.targetRegions}</p>
+                        <p className="text-red-500 text-left">{formErrors.targetRegions}</p>
                     )}
                     <label htmlFor='company_funding_stage' className='text-lg my-4 block font-semibold text-left'>What stage of funding are you in?</label>
                     <FormControl fullWidth size='small'>
                         <Select
                             id="company_funding_stage"
-                            value={company.fundingStage || ''}
-                            onChange={(event) => { dispatch(updateFundingStage({ ...company, fundingStage: event.target.value })) }}
+                            value={company?.fundingStage}
+                            onChange={(event) => { dispatch(updateFundingStage(event.target.value)) }}
                             variant='outlined'
                             name='company_funding_stage'
                             className='text-left'
                         >
-                            <MenuItem value="">Select a stage</MenuItem>
+                            <MenuItem selected disabled value=''>
+                                <em>Choose Company Type</em>
+                            </MenuItem>
                             <MenuItem value="Pre-seed">Pre-seed</MenuItem>
                             <MenuItem value="Seed">Seed</MenuItem>
                             <MenuItem value="Series A">Series A</MenuItem>
@@ -309,18 +330,21 @@ const Home = () => {
                         </Select>
                     </FormControl>
                     {formErrors.fundingStage && (
-                        <p className="text-red-500">{formErrors.fundingStage}</p>
+                        <p className="text-red-500 text-left">{formErrors.fundingStage}</p>
                     )}
                     <label htmlFor='company_revenue' className='text-lg my-4 block font-semibold text-left'>What is your annual revenue?</label>
                     <FormControl fullWidth size='small'>
                         <Select
                             id="company_revenue"
-                            value={company.annualRevenue || ''}
-                            onChange={(event) => { dispatch(updateAnnualRevenue({ ...company, annualRevenue: event.target.value })) }}
+                            value={company?.annualRevenue}
+                            onChange={(event) => { dispatch(updateAnnualRevenue(event.target.value)) }}
                             variant='outlined'
                             name='company_revenue'
                             className='text-left'
                         >
+                            <MenuItem selected disabled value=''>
+                                <em>Choose Company Type</em>
+                            </MenuItem>
                             <MenuItem value="$0">Less than $1k</MenuItem>
                             <MenuItem value="$1k-$100k">$1k - $100k</MenuItem>
                             <MenuItem value="$100k-$1M">$100k - $1M</MenuItem>
@@ -329,19 +353,21 @@ const Home = () => {
                         </Select>
                     </FormControl>
                     {formErrors.annualRevenue && (
-                        <p className="text-red-500">{formErrors.annualRevenue}</p>
+                        <p className="text-red-500 text-left">{formErrors.annualRevenue}</p>
                     )}
                     <label htmlFor='company_model' className='text-lg my-4 block font-semibold text-left'>How would you describe your business model?</label>
                     <FormControl fullWidth size='small'>
                         <Select
                             id="company_model"
-                            value={company.businessModel || ''}
-                            onChange={(event) => { dispatch(updateBusinessModel({ ...company, businessModel: event.target.value })) }}
+                            value={company?.businessModel}
+                            onChange={(event) => { dispatch(updateBusinessModel(event.target.value)) }}
                             variant='outlined'
                             name='company_model'
                             className='text-left'
                         >
-                            <MenuItem value="">Select a business model</MenuItem>
+                            <MenuItem selected disabled value=''>
+                                <em>Choose Company Type</em>
+                            </MenuItem>
                             <MenuItem value="Subscription">Subscription</MenuItem>
                             <MenuItem value="Transactional">Transactional</MenuItem>
                             <MenuItem value="Freemium">Freemium</MenuItem>
@@ -349,9 +375,9 @@ const Home = () => {
                         </Select>
                     </FormControl>
                     {formErrors.businessModel && (
-                        <p className="text-red-500">{formErrors.businessModel}</p>
+                        <p className="text-red-500 text-left">{formErrors.businessModel}</p>
                     )}
-                    <Button onClick={handleSave} className='bg-green py-3 px-5 rounded-md'>Save</Button>
+                    <button onClick={handleSave} className='bg-[#38a169] py-2 mt-5 px-5 rounded-md w-full text-white font-semibold'>Save</button>
                 </form>
             </motion.div>
         </div >
