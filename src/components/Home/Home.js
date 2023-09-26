@@ -9,7 +9,20 @@ import {
     Select,
     Button,
 } from '@mui/material';
-import { selectCompanyform, updateCompany } from '../../features/Company/Company';
+import {
+    selectCompanyform,
+    updateCompanyName,
+    updateIndustry,
+    updateVertical,
+    updateCompanyType,
+    updateCompanySize,
+    updateHeadquartersLocation,
+    updateTargetRegions,
+    updateFundingStage,
+    updateAnnualRevenue,
+    updateBusinessModel,
+} from '../../features/Company/Company'; // Import your Redux actions
+
 import { countries, industries } from '../../constants';
 
 const Home = () => {
@@ -20,13 +33,13 @@ const Home = () => {
 
     const handleFormState = () => {
         setFormState(true);
-    }
+    };
 
     const handleSave = () => {
         const errors = {};
 
-        if (!company.company_name) {
-            errors.company_name = 'Company name is required.';
+        if (!company.companyName) {
+            errors.companyName = 'Company name is required.';
         }
         if (!company.industry) {
             errors.industry = 'Industry is required.';
@@ -34,8 +47,8 @@ const Home = () => {
         if (!company.vertical) {
             errors.vertical = 'Vertical is required.';
         }
-        if (!company.company_type) {
-            errors.company_type = 'Company type is required.';
+        if (!company.companyType) {
+            errors.companyType = 'Company type is required.';
         }
         if (!company.companySize) {
             errors.companySize = 'Company size is required.';
@@ -57,11 +70,21 @@ const Home = () => {
         }
 
         if (Object.keys(errors).length === 0) {
-            dispatch(updateCompany(company));
+            // Dispatch the appropriate actions to update the Redux state
+            dispatch(updateCompanyName(company.companyName));
+            dispatch(updateIndustry(company.industry));
+            dispatch(updateVertical(company.vertical));
+            dispatch(updateCompanyType(company.companyType));
+            dispatch(updateCompanySize(company.companySize));
+            dispatch(updateHeadquartersLocation(company.headquartersLocation));
+            dispatch(updateTargetRegions(company.targetRegions));
+            dispatch(updateFundingStage(company.fundingStage));
+            dispatch(updateAnnualRevenue(company.annualRevenue));
+            dispatch(updateBusinessModel(company.businessModel));
         } else {
             setFormErrors(errors);
         }
-    }
+    };
 
     const textVariants = {
         hidden: {
@@ -134,7 +157,7 @@ const Home = () => {
                         value={company.company_name || ""}
                         size="small"
                         className='w-full'
-                        onChange={(event) => { dispatch(updateCompany({ ...company, company_name: event.target.value })) }}
+                        onChange={(event) => { dispatch(updateCompanyName({ ...company, company_name: event.target.value })) }}
                     />
                     {formErrors.company_name && (
                         <p className="text-red-500">{formErrors.company_name}</p>
@@ -143,7 +166,7 @@ const Home = () => {
                     <Autocomplete
                         value={company.industry || ""}
                         onChange={(event, newValue) => {
-                            dispatch(updateCompany({ ...company, industry: newValue?.label || "" }))
+                            dispatch(updateCompanyName({ ...company, industry: newValue?.label || "" }))
                         }}
                         inputValue={company.industry || ""}
                         id="industry_type"
@@ -171,7 +194,7 @@ const Home = () => {
                         value={company.vertical || ""}
                         size="small"
                         className='w-full'
-                        onChange={(event) => { dispatch(updateCompany({ ...company, vertical: event.target.value })) }}
+                        onChange={(event) => { dispatch(updateVertical({ ...company, vertical: event.target.value })) }}
                     />
                     {formErrors.vertical && (
                         <p className="text-red-500">{formErrors.vertical}</p>
@@ -180,7 +203,7 @@ const Home = () => {
                     <FormControl fullWidth size='small'>
                         <Select
                             id="company_type"
-                            onChange={(event) => { dispatch(updateCompany({ ...company, company_type: event.target.value })) }}
+                            onChange={(event) => { dispatch(updateCompanyType({ ...company, company_type: event.target.value })) }}
                             variant='outlined'
                             name='company_type'
                             className='text-left'
@@ -202,7 +225,7 @@ const Home = () => {
                         <Select
                             id="company_size"
                             value={company.companySize || ''}
-                            onChange={(event) => { dispatch(updateCompany({ ...company, companySize: event.target.value })) }}
+                            onChange={(event) => { dispatch(updateCompanySize({ ...company, companySize: event.target.value })) }}
                             variant='outlined'
                             name='company_size'
                             className='text-left'
@@ -224,7 +247,7 @@ const Home = () => {
                         disableClearable
                         onChange={(event) => {
                             event.preventDefault();
-                            dispatch(updateCompany({ ...company, headquartersLocation: event.target.value?.label }))
+                            dispatch(updateHeadquartersLocation({ ...company, headquartersLocation: event.target.value?.label }))
                         }}
                         id="company_headquarters"
                         options={countries}
@@ -248,7 +271,7 @@ const Home = () => {
                         value={company.targetRegions || ""}
                         onChange={(event) => {
                             event.preventDefault();
-                            dispatch(updateCompany({ ...company, targetRegions: event.target.value }))
+                            dispatch(updateTargetRegions({ ...company, targetRegions: event.target.value }))
                         }}
                         id="company_target_regions"
                         options={countries}
@@ -273,7 +296,7 @@ const Home = () => {
                         <Select
                             id="company_funding_stage"
                             value={company.fundingStage || ''}
-                            onChange={(event) => { dispatch(updateCompany({ ...company, fundingStage: event.target.value })) }}
+                            onChange={(event) => { dispatch(updateFundingStage({ ...company, fundingStage: event.target.value })) }}
                             variant='outlined'
                             name='company_funding_stage'
                             className='text-left'
@@ -293,7 +316,7 @@ const Home = () => {
                         <Select
                             id="company_revenue"
                             value={company.annualRevenue || ''}
-                            onChange={(event) => { dispatch(updateCompany({ ...company, annualRevenue: event.target.value })) }}
+                            onChange={(event) => { dispatch(updateAnnualRevenue({ ...company, annualRevenue: event.target.value })) }}
                             variant='outlined'
                             name='company_revenue'
                             className='text-left'
@@ -313,7 +336,7 @@ const Home = () => {
                         <Select
                             id="company_model"
                             value={company.businessModel || ''}
-                            onChange={(event) => { dispatch(updateCompany({ ...company, businessModel: event.target.value })) }}
+                            onChange={(event) => { dispatch(updateBusinessModel({ ...company, businessModel: event.target.value })) }}
                             variant='outlined'
                             name='company_model'
                             className='text-left'
