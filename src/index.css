@@ -1,13 +1,56 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  outline: 0px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  .note_css {
+    @apply lg:block xl:block absolute w-72 h-60 bg-[#fffdb5] hidden
+  }
+
+  .main {
+    @apply pt-[64px] pl-[65px] bg-green-50 min-h-screen h-screen overflow-hidden
+  }
+
+  .canvasEditor {
+    @apply flex justify-start items-start w-full h-full pt-10
+  }
+
+  .canvasContainer {
+    @apply hidden lg:w-2/3 xl:w-2/3 lg:flex xl:flex justify-center items-center flex-col
+  }
+
+  .canvasStatusMonitor {
+    @apply w-3/4 flex justify-center items-center
+  }
+
+  .canvasStatusController {
+    @apply cursor-pointer w-1/2 flex flex-col justify-center items-center text-center border-2 border-[#38a169] rounded-md border-b-0
+  }
+
+  .canvas {
+    @apply flex justify-center items-center w-full h-full
+  }
+
+  .formSidebarContainer {
+    @apply w-1/3 h-full pr-5
+  }
+
+  .canvasCarousel {
+    @apply max-h-[600px] h-[600px] w-full flex justify-center items-center pt-0 overflow-hidden
+  }
+
+  .note_css {
+    @apply lg:block xl:block absolute w-60 h-52 bg-[#fffdb5] hidden
+  }
+
+  .application_menu_item {
+    @apply flex items-center cursor-pointer transition-all ease-in
+  }
 }
