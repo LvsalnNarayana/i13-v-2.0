@@ -150,7 +150,7 @@ const Home = () => {
                 </button>
             </motion.div>
             <motion.div
-                className='w-1/3 h-screen min-h-screen flex justify-center items-center'
+                className='w-full lg:w-1/3 xl:w-1/3 h-screen min-h-screen flex justify-center items-center p-4'
                 initial="hidden"
                 animate={!formState ? "exit" : "visible"}
                 variants={formVariants}>

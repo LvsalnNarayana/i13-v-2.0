@@ -14,7 +14,7 @@ const CustomerCanvas = () => {
   return (
     <>
       <div className='relative w-full flex justify-center'>
-        <img src="/customerProfile.svg" className='w-[55%]' alt="" />
+        <img src="https://res.cloudinary.com/dlc4g33ea/image/upload/v1695740912/lqduxdwn1e7wif9zfzee.png" className='w-[55%]' alt="" />
         <Note
           classes='note_css top-8 left-74'
           contents={gains?.contents} name={'Gains'} />

@@ -14,7 +14,7 @@ const ValueCanvas = () => {
     return (
         <>
             <div className='relative w-full flex justify-center'>
-                <img src="/valueMap.svg" className='w-[55%]' alt="" />
+                <img src="https://res.cloudinary.com/dlc4g33ea/image/upload/v1695740912/lc2covsqh3ghegw89ui8.png" className='w-[55%]' alt="" />
                 <Note
                     classes='note_css top-8 right-52'
                     contents={gainCreators?.contents} name={'Gain Creators'} />

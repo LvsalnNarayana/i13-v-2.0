@@ -37,6 +37,7 @@ const VPCCanvasEditor = () => {
 
     return (
         <>
+
             <div className='canvasEditor'>
                 <div className='canvasContainer'>
                     <div className='canvasStatusMonitor'>
@@ -69,11 +70,11 @@ const VPCCanvasEditor = () => {
                             index={canvasStatus}
                             onChangeIndex={handleActiveCanvas}
                         >
-                            <div value={canvasStatus} index={0} dir={theme.direction} className='canvasStatus'>
+                            <div value={canvasStatus} index={0} dir={theme.direction} className='canvas'>
                                 <ValueCanvas />
 
                             </div>
-                            <div value={canvasStatus} index={1} dir={theme.direction} className='canvasStatus'>
+                            <div value={canvasStatus} index={1} dir={theme.direction} className='canvas'>
                                 <CustomerCanvas />
                                 {/* <img src="/customerProfile.svg" className='w-1/2' alt="" /> */}
 

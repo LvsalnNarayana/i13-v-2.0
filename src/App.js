@@ -20,11 +20,11 @@ const theme = createTheme({
 });
 
 const VPCTemplate = ({ leftDrawerStatus, rightDrawerStatus }) => (
-  <div>
+  <div className='bg-green-50'>
     <Header />
     <ApplicationMenu />
     <RightMenu />
-    <Main LeftOpen={leftDrawerStatus} RightOpen={rightDrawerStatus} className='main'>
+    <Main LeftOpen={leftDrawerStatus} RightOpen={rightDrawerStatus} className='main  max-w-screen-2xl'>
       <VPCCanvasEditor />
     </Main>
   </div>
